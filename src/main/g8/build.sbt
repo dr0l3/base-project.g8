@@ -18,7 +18,7 @@ lazy val catsVersion = "1.1.0"
 lazy val kittensVersion = "1.0.0-RC3"
 lazy val monocleVersion = "1.5.0"
 lazy val circeVersion = "0.9.1"
-lazy val Http4sVersion = "0.18"
+lazy val Http4sVersion = "0.18.5"
 lazy val doobieVersion = "0.5.2"
 
 
@@ -37,7 +37,7 @@ lazy val thriftVersion = Seq(
 lazy val commonDeps = Seq(
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % catsVersion,
-    "org.typelevel" %%% "cats-mtl" % "0.2.1",
+    "org.typelevel" %% "cats-mtl" % "0.2.3",
     "org.typelevel" %% "kittens" % "1.0.0-RC3",
     "com.github.julien-truffaut" %%  "monocle-core"  % monocleVersion,
     "com.github.julien-truffaut" %%  "monocle-macro" % monocleVersion,
