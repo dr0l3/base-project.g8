@@ -130,12 +130,6 @@ lazy val commonDockerSettings =
     }
   }
 
-def dockerImageNames(imageName: String) = {
-  imageNames in docker := Seq(
-    ImageName(s"dr0l3/base-test-$imageName:latest")
-  )
-}
-
 def baseproject(loc: String): Project =
   Project(loc, file(loc))
     .settings(
