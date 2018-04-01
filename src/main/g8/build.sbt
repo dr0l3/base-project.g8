@@ -62,7 +62,6 @@ lazy val commonDeps = Seq(
   )
 )
 
-
 lazy val commonScalaFlags = Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding", "utf-8", // Specify character encoding used by source files.
@@ -118,18 +117,6 @@ lazy val commonScalaFlags = Seq(
   "-Xlint:strict-unsealed-patmat" // warn on inexhaustive matches against unsealed traits
 )
 
-lazy val commonDockerSettings =
-  dockerfile in docker := {
-    val appDir: File = stage.value
-    val targetDir = "/app"
-
-    new Dockerfile {
-      from("anapsix/alpine-java8")
-      entryPoint(s"$targetDir/bin/${executableScriptName.value}")
-      copy(appDir, targetDir, chown = "daemon:daemon")
-    }
-  }
-
 def baseproject(loc: String): Project =
   Project(loc, file(loc))
     .settings(
@@ -142,13 +129,9 @@ def baseproject(loc: String): Project =
 
 lazy val domain = baseproject("domain")
 lazy val server = baseproject("$name$")
-  .settings(commonDockerSettings)
   .dependsOn(domain)
-  .enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaing)
 lazy val client = baseproject("client")
-  .settings(commonDockerSettings)
   .dependsOn(domain)
-  .enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaing)
 
 lazy val all = (project in file("."))
   .aggregate(server, domain)
