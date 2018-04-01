@@ -62,24 +62,6 @@ lazy val commonDeps = Seq(
   )
 )
 
-lazy val commonDockerSettings =
-  dockerfile in docker := {
-    val appDir: File = stage.value
-    val targetDir = "/app"
-
-    new Dockerfile {
-      from("anapsix/alpine-java8")
-      entryPoint(s"$targetDir/bin/${executableScriptName.value}")
-      copy(appDir, targetDir, chown = "daemon:daemon")
-    }
-  }
-
-def dockerImageNames(imageName: String) = {
-  imageNames in docker := Seq(
-    // Sets the latest tag
-    ImageName(s"$dockerrepo$/$name$-$imageName:latest")
-  )
-}
 
 lazy val commonScalaFlags = Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
@@ -143,8 +125,7 @@ def baseproject(loc: String): Project =
       commonResolvers,
       commonScalaVersion,
       commonDeps,
-      scalacOptions ++= commonScalaFlags,
-      commonDockerSettings
+      scalacOptions ++= commonScalaFlags
     )
 
 
