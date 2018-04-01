@@ -62,32 +62,6 @@ lazy val commonDeps = Seq(
   )
 )
 
-
-//lazy val commonDocker = dockerfile in docker := {
-//  val jarFile: File = sbt.Keys.`package`.in(Compile, packageBin).value
-//  val classpath = (managedClasspath in Compile).value
-//  val mainclass = mainClass.in(Compile, packageBin).value.getOrElse(sys.error("Expected exactly one main class"))
-//  val jarTarget = s"/app/${jarFile.getName}"
-//  // Make a colon separated classpath with the JAR file
-//  val classpathString = classpath.files.map("/app/" + _.getName)
-//    .mkString(":") + ":" + jarTarget
-//
-//  new Dockerfile {
-//    from("anapsix/alpine-java")
-//    expose(8000)
-//    add(classpath.files, "/app/")
-//    add(jarFile, jarTarget)
-//    entryPoint("java", "-cp", classpathString, mainclass)
-//  }
-//}
-//
-//def dockerImageNames(name: String) = {
-//  imageNames in docker := Seq(
-//    // Sets the latest tag
-//    ImageName(s"dr0l3/fts-$name:latest")
-//  )
-//}
-
 lazy val commonScalaFlags = Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding", "utf-8", // Specify character encoding used by source files.
@@ -151,8 +125,6 @@ def baseproject(loc: String): Project =
       commonScalaVersion,
       commonDeps,
       scalacOptions ++= commonScalaFlags
-//      commonDocker,
-//      dockerImageNames(loc)
     )
 
 
