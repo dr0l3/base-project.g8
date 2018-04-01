@@ -37,7 +37,7 @@ lazy val thriftVersion = Seq(
 lazy val commonDeps = Seq(
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % catsVersion,
-    "org.typelevel" %% "cats-mtl" % "0.2.1",
+    "org.typelevel" %%% "cats-mtl" % "0.2.1",
     "org.typelevel" %% "kittens" % "1.0.0-RC3",
     "com.github.julien-truffaut" %%  "monocle-core"  % monocleVersion,
     "com.github.julien-truffaut" %%  "monocle-macro" % monocleVersion,
