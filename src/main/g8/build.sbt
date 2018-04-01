@@ -143,8 +143,14 @@ def baseproject(loc: String): Project =
       commonResolvers,
       commonScalaVersion,
       commonDeps,
-      scalacOptions ++= commonScalaFlags
+      scalacOptions ++= commonScalaFlags,
+      commonDockerSettings
     )
 
 
 lazy val server = baseproject("$name$")
+lazy val domain = baseproject("domain")
+lazy val client = baseproject("client")
+
+lazy val all = (project in file("."))
+  .aggregate(server, domain)
